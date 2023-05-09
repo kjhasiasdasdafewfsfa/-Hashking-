@@ -1,0 +1,38 @@
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Perceptron
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+# 加载数据集
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+print("数据集特征")
+print(iris.data)
+print("\n目标值")
+print(iris.target)
+# 将数据集拆分为训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 创建感知机模型并进行训练
+perceptron = Perceptron()
+perceptron.fit(X_train, y_train)
+
+# 使用感知机模型进行预测
+perceptron_predictions = perceptron.predict(X_test)
+
+# 计算感知机模型的准确率
+perceptron_accuracy = accuracy_score(y_test, perceptron_predictions)
+print("Perceptron Accuracy:", perceptron_accuracy)
+
+# 创建支持向量机模型并进行训练
+svm = SVC()
+svm.fit(X_train, y_train)
+
+# 使用支持向量机模型进行预测
+svm_predictions = svm.predict(X_test)
+
+# 计算支持向量机模型的准确率
+svm_accuracy = accuracy_score(y_test, svm_predictions)
+print("SVM Accuracy:", svm_accuracy)
