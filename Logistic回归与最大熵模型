@@ -1,0 +1,29 @@
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# 加载鸢尾花数据集
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+# 将数据集拆分为训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 特征缩放
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 创建并训练Logistic回归模型
+logistic_regression = LogisticRegression(max_iter=1000)
+logistic_regression.fit(X_train_scaled, y_train)
+
+# 使用Logistic回归模型进行预测
+lr_predictions = logistic_regression.predict(X_test_scaled)
+
+# 计算Logistic回归模型的准确率
+lr_accuracy = accuracy_score(y_test, lr_predictions)
+print("Logistic Regression Accuracy:", lr_accuracy)
