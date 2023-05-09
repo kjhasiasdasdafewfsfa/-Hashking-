@@ -1,0 +1,47 @@
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.metrics import accuracy_score
+
+# 加载数据集
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+# 将数据集拆分为训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 创建并训练K近邻法模型
+knn = KNeighborsClassifier()
+knn.fit(X_train, y_train)
+
+# 使用K近邻法模型进行预测
+knn_predictions = knn.predict(X_test)
+
+# 计算K近邻法模型的准确率
+knn_accuracy = accuracy_score(y_test, knn_predictions)
+print("K-Nearest Neighbors Accuracy:", knn_accuracy)
+
+# 创建并训练决策树模型
+decision_tree = DecisionTreeClassifier()
+decision_tree.fit(X_train, y_train)
+
+# 使用决策树模型进行预测
+decision_tree_predictions = decision_tree.predict(X_test)
+
+# 计算决策树模型的准确率
+decision_tree_accuracy = accuracy_score(y_test, decision_tree_predictions)
+print("Decision Tree Accuracy:", decision_tree_accuracy)
+
+# 创建并训练提升树模型
+adaboost = AdaBoostClassifier()
+adaboost.fit(X_train, y_train)
+
+# 使用提升树模型进行预测
+adaboost_predictions = adaboost.predict(X_test)
+
+# 计算提升树模型的准确率
+adaboost_accuracy = accuracy_score(y_test, adaboost_predictions)
+print("AdaBoost Accuracy:", adaboost_accuracy)
