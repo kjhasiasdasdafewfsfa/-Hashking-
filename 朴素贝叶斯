@@ -1,0 +1,22 @@
+from sklearn.datasets import load_iris
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+
+# 1. 加载莺尾花数据集
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# 2. 划分训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. 训练朴素贝叶斯模型
+nb_model = GaussianNB()
+nb_model.fit(X_train, y_train)
+
+# 4. 模型测试
+y_pred = nb_model.predict(X_test)
+
+# 计算准确率
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
