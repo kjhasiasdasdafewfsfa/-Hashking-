@@ -27,3 +27,13 @@ lr_predictions = logistic_regression.predict(X_test_scaled)
 # 计算Logistic回归模型的准确率
 lr_accuracy = accuracy_score(y_test, lr_predictions)
 print("Logistic Regression Accuracy:", lr_accuracy)
+# 创建并训练最大熵模型
+max_entropy = LogisticRegression(penalty='l2', solver='lbfgs', multi_class='multinomial',max_iter=1000)
+max_entropy.fit(X_train, y_train)
+
+# 使用最大熵模型进行预测
+max_entropy_predictions = max_entropy.predict(X_test)
+
+# 计算最大熵模型的准确率
+max_entropy_accuracy = accuracy_score(y_test, max_entropy_predictions)
+print("Max Entropy Accuracy:", max_entropy_accuracy)
